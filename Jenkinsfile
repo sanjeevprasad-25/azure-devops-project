@@ -19,9 +19,11 @@ pipeline{
         }
          stage("Initializing terraform"){
             steps{
-                echo "Initialize Terraform"
-                sh 'terraform init'
-                 }
+                dir('terraform') {
+                    echo "Initialize Terraform"
+                    sh 'terraform init'
+                    }
+                  }
             post{
                 success{
                     echo "========Initialized successfully========"
@@ -33,11 +35,13 @@ pipeline{
         }
          stage("Validating and Planning terraform"){
             steps{
+                dir ('terraform') {
                 echo "Validate Terraform"
                 sh 'terraform validate'
                 echo "Plan Terraform"
                 sh 'terraform plan -out=tfplan'
                 sh 'ls -l'
+                }
                  }
             post{
                 success{
@@ -50,9 +54,11 @@ pipeline{
         }
              stage("Applying terraform"){
             steps{
+                dir('terraform') {
                 echo "Apply Terraform"
                 sh 'terraform apply --auto-approve tfplan'
                   }
+                }
             post{
                 success{
                     echo "========Applied successfully========"
