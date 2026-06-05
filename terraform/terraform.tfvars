@@ -1,0 +1,6 @@
+rg_name = "santech"
+rg_location = "Central India"
+rg_env = "staging"
+rg_network_name = "santech_vnet"
+rg_subnet_name = "santech_subnet"
+vm_password = "Pass@1234"
